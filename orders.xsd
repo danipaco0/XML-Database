@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+  attributeFormDefault="unqualified" 
+  elementFormDefault="qualified"> 
+  <xs:element name="Orders">
+  <!--Type complexe car il contient plusieurs éléments-->
+    <xs:complexType> 
+    <!--Séquence pour spécifier l'ordre des éléments-->
+      <xs:sequence>
+      <!--Unbounded car plusieurs éléments Order-->
+        <xs:element maxOccurs="unbounded" name="Order">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="OrderID" type="xs:integer"/>
+              <xs:element maxOccurs="unbounded" name="Description">
+              <!--mixed car contient la description + les éléments-->
+                <xs:complexType mixed="true">
+                  <xs:sequence>
+                    <xs:element name="Quantity" type="xs:integer"/>
+                    <xs:element name="UnitPrice" type="xs:decimal"/>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="InvoiceDate" type="xs:string" />
+              <xs:element name="CustomerID" type="xs:integer" minOccurs="0"/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
